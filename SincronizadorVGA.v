@@ -55,3 +55,52 @@ hsync_reg<=hsync_next;
 end
 
 //Contador mod 4
+//*************************************************
+//*************************************************
+//Falta
+//*************************************************
+//*************************************************
+
+
+//Señales de estado
+//Fin del contador horizontal (799)
+assign h_end=(hcount_reg==(HD+HF+HB+HR-1));//h_end es verdadero solamente si el contador llego a 799
+//Fin del contador vertical (524)
+assign v_end=(vcount_reg==(VD+VF+VB+VR-1));//v_end es verdadero solamente si el contador llego a 524
+
+//Logica de siguiente estado contador eje x (mod 800)
+always @*
+if (pixel_tick)//Señal de 25Mhz
+if (h_end) //Si la señal h_end es verdadera el contador se reinicia
+hcount_next=0;
+else
+hcount_next=hcount_reg+1;//si nó, aumenta el contador en 1
+else
+hcount_next=hcount_reg;// Si no hay una señal de reloj se mantiene en el mismo estado
+
+//Logica de estado siguiente contador eje y (mod 525)
+always @*
+if (pixel_tick & h_end)// Si el clock de 25Mhz esta en alto y el contador horizontal llego a su limite
+if (v_end) //Si el contador del eje y tambien llego a su limite se reinicia
+vcount_next=0;
+else
+vcount_next=vcount_reg+1;//Si nó, aumenta en uno el contador vertical
+else
+vcount_next=vcount_reg; //Si nó se cumple la primera condicion, se mantiene en el mismo estado
+
+//Señales de sincronizacion vertical y horizontal con buffers para evitar glitch
+//Señal hsync_next activa entre los pixeles 656 y 751
+assign hsync_next=(hcount_reg>=(HD+HB) && hcount_reg<=(HD+HB+HR-1));
+
+//Señal vsync_next activa entre los pixeles 490 Y 491
+assign vsync_next=(vcount_reg>=(VD+VB) && vcount_reg<=(VD+VB+VR-1));
+
+//Video On/Off
+assign video_on=(hcount_reg<HD) && (vcount_reg<VD);//Pone la señal video_on en alto solo cuando los contadores vertical y horizontal se encuentran en las zonas de la pantalla donde se puede escribir
+
+//Salidas
+assign hsync=hsync_reg;
+assign vsync=vsync_reg;
+assign pixelx=hcount_reg;
+assign pixely=vcount_reg;
+assign tick=pixel_tick;
