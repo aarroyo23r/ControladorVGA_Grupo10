@@ -98,7 +98,7 @@ assign cursor_on = (pix_y2_reg[8:4] == cur_y_reg) &&
             rgb_text = font_rev_rgb;
          else
             rgb_text =font_rgb;
- endmodule             
+ endmodule             //
 
 
 
