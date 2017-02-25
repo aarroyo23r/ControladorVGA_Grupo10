@@ -57,12 +57,11 @@ end
 always @(posedge clk)
 if (mod4_reg== 2'b11)//Cuando el contador llega a 4 genera una señal de tick y se reinicia
 begin
-pixel_tick=1;//Señal a 25Mhz
+pixel_tick=~pixel_tick;//Señal a 25Mhz
 mod4_reg=2'b00;
 end
 else//Si el contador no llega a ese valor sigue contando
 begin
-pixel_tick=0;
 mod4_reg=mod4_reg+1;
 end
 
@@ -95,10 +94,11 @@ vcount_next=vcount_reg; //Si nó se cumple la primera condicion, se mantiene en 
 
 //Señales de sincronizacion vertical y horizontal con buffers para evitar glitch
 //Señal hsync_next activa entre los pixeles 656 y 751
-assign hsync_next=(hcount_reg>=(HD+HB) && hcount_reg<=(HD+HB+HR-1));
+assign hsync_next=~(hcount_reg>=(HD+HB) && hcount_reg<=(HD+HB+HR-1));
 
+//El codigo original producia una señal vsync_next activa entre 513 y 515
 //Señal vsync_next activa entre los pixeles 490 Y 491
-assign vsync_next=(vcount_reg>=(VD+VB) && vcount_reg<=(VD+VB+VR-1));
+assign vsync_next=~(vcount_reg>=(VD+VB-23) && vcount_reg<=(VD+VB+VR-1-23));
 
 //Video On/Off
 assign video_on=(hcount_reg<HD) && (vcount_reg<VD);//Pone la señal video_on en alto solo cuando los contadores vertical y horizontal se encuentran en las zonas de la pantalla donde se puede escribir
