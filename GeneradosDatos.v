@@ -61,7 +61,7 @@ Font_rom font_unit //modulo que crea las letras en memoria
 assign font_bit =font_word [~bit_addr];              
  //rgb multiplexor
 Color color_unir // modulo que determina si pasa o no rgb
-   (.clk(clk), .switch(), .rgb(), .bit_let(font_bit), .video_on())
+    (.clk(clk), .switch(), .rgb(rgb_text), .bit_let(font_bit), .video_on(video_on))
 
 endmodule //
 
