@@ -6,6 +6,7 @@ module Generador_datos
     input wire video_on,
     input wire [9:0] pixel_x, pixel_y, //posición pixel actual
     output reg [2:0] rgb_text   // bit de color a VGA
+    input wire[7:0] switch
  );
 
  //variables internas de conexió
@@ -27,7 +28,7 @@ assign bit5_y = pixel_y[4];
 assign row_addr= pixel_y[3:0]; //4 bits menos significatvos de y
 assign bajos_x = pixel_x[4:0]; // menos significativos de x;
 
-    always @(pixel_x or posedge clk)            // No se pueden mezclar partes conbinacionales y secuenciales en la lista de sensibilidad
+    always @(posedge clk)            // No se pueden mezclar partes conbinacionales y secuenciales en la lista de sensibilidad
     begin
         if (pixel_x < 10'b0000100000)         //Análisis de las filas
             letra = 2'b11;                     // si pixel_x es menor que 8; le asigna la letra E
@@ -40,7 +41,7 @@ assign bajos_x = pixel_x[4:0]; // menos significativos de x;
             end
      end
 
-    always @ (bit5_y or letra or posedge clk)     // No se pueden mezclar partes conbinacionales y secuenciales en la lista de sensibilidad, creo que tiene que escribirlo algo asi (posedge bit5_y, posedge letra, posedge clk)
+    always @ (posedge clk)     // No se pueden mezclar partes conbinacionales y secuenciales en la lista de sensibilidad, creo que tiene que escribirlo algo asi (posedge bit5_y, posedge letra, posedge clk)
     begin                                         // asi cada vez que bit5_y o letra pasen de 0 a 1 entra en el always o cuando hay un flanco de reloj
        case(bit5_y)                        //Análisis por columnas con el 5to bit de pixel_y
        1'b1:selecreg <= 2'b00;           //No se bien la sintaxis del case pero me parece que esta combinando variables de distinto numero de bits
@@ -61,6 +62,6 @@ Font_rom font_unit //modulo que crea las letras en memoria
 assign font_bit =font_word [~bit_addr];
  //rgb multiplexor
 Color color_unir // modulo que determina si pasa o no rgb
-    (.clk(clk), .switch(), .rgb(rgb_text), .bit_let(font_bit), .video_on(video_on)); // Aqui el switch no tiene nada asignado
+    (.clk(clk), .switch(switch), .rgb(rgb_text), .bit_let(font_bit), .video_on(video_on)); // Aqui el switch no tiene nada asignado
 
 endmodule //
