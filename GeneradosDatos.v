@@ -27,7 +27,7 @@ assign bit5_y = pixel_y[4];
 assign row_addr= pixel_y[3:0]; //4 bits menos significatvos de y
 assign bajos_x = pixel_x[4:0]; // menos significativos de x;
 
-always @(pixel_x)
+    always @(pixel_x or posedge clk)
     begin
         if (pixel_x < 10'b0000100000)         //Análisis de las filas
             letra = 2'b11;                     // si pixel_x es menor que 8; le asigna la letra E
@@ -40,11 +40,11 @@ always @(pixel_x)
             end
      end     
 
-always @ (bit5_y or pixel_x)
+    always @ (bit5_y or letra or posedge clk)
     begin                                       //Análisis por columnas con el 5to bit de pixel_y
        case(bit5_y)
-       1'b1:selecreg = 2'b00;
-       1'b0:selecreg = letra;   
+       1'b1:selecreg <= 2'b00;
+       1'b0:selecreg <= letra;   
        endcase
     end
  
