@@ -50,9 +50,7 @@ assign bajos_x = pixel_x[4:0]; // menos significativos de x;
        1'b0:selecreg <= letra;
        endcase
     end
-
-//Estos módulos utilizan el clk de 100 MHz y no el tick generado de 25 MHz, sin embargo sus funciones las realizan utilizando variables dependientes de pixel_x y pixel_y
-//Por lo tanto no debe hacer desfase con la VGA    
+    
 //Registros que almacenan direccionens
 Registros register_unit
        (.clk(clk), .selec(selecreg), .direc(char_addr));
