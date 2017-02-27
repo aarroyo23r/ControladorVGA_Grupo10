@@ -32,7 +32,7 @@ assign bajos_x = pixel_x[4:0]; // menos significativos de x;
 
     always @(posedge clk)            // No se pueden mezclar partes conbinacionales y secuenciales en la lista de sensibilidad
     begin
-        if (pixel_x < 10'b0000100000)         //Análisis de las filas
+        if (pixel_x < 10'b0000011000)         //Análisis de las filas
             letra = 2'b11;                     // si pixel_x es menor que 8; le asigna la letra E
         if (pixel_x < 10'b0000010000)
              letra = 2'b10;
