@@ -26,7 +26,6 @@ module Generador_datos
  
 
 //body
-assign bit_addr =pixel_x[2:0];
 assign bit5_y = pixel_y[4];
 assign row_addr= pixel_y[3:0]; //4 bits menos significatvos de y
 assign bajos_x = pixel_x[4:0]; // menos significativos de x;
@@ -60,13 +59,5 @@ Registros register_unit
 
 assign rom_addr ={char_addr, row_addr}; //concatena direcciones de registros y filas
 
-//FONT ROM
-Font_rom font_unit //modulo que crea las letras en memoria
-   (.clk(clk), .dir(rom_addr), .data(font_word));
-
-assign font_bit =font_word [~bit_addr];
- //rgb multiplexor
-Color color_unir // modulo que determina si pasa o no rgb
-    (.clk(clk), .switch(switch), .rgb(rgb_text), .bit_let(font_bit), .video_on(video_on)); // Aqui el switch no tiene nada asignado
 
 endmodule //
