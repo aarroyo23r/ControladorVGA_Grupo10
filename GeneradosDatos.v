@@ -7,17 +7,15 @@ module Generador_datos
     input wire [9:0] pixel_x, //posición pixel actual
     input wire [4:0] pixel_y,
     output wire [2:0] rgb_text,   // bit de color a VGA
-    input wire [7:0] switch
+    output wire rom_addr
  );
 
  //variables internas de conexió
 
- wire [10:0] rom_addr; //dirección de memoria completa
  wire [6:0] char_addr; //  bits mas significativos de dirreción de memoria
  wire [3:0] row_addr; // bit menos significativos de memoria, para variar filas
  wire [2:0] bit_addr; // señal de control MUX final
  wire [7:0] font_word; // datos de memoria
- wire font_bit;//variable de salida; antes de color
  wire bit5_y; //5to bit de posicion en y
  wire [4:0] bajos_x;
  reg [1:0] selecreg;
