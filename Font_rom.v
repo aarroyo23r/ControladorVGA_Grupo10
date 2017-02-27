@@ -20,20 +20,20 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Font_rom(
+module Font_rom(  //declaración de parametros
     input wire [10:0] dir,
     input wire clk,
     output reg [7:0] data
     );
     
- reg [10:0] dir_reg;
+    reg [10:0] dir_reg; //variable interna
  
- always @(posedge clk)
-    dir_reg <= dir;
+    always @(posedge clk)//se asigna el valor de la dirección deseada a la variable interna que es quien se utiliza
+    dir_reg <= dir; //la operación se realiza cada pulso de clk, sin embargo la dirección que se busca en la memoria no cambia mientras el input dir no cambie
     
     
  always @*
-    case(dir_reg)
+     case(dir_reg) //se escoge la dirección en memoria
             11'h000: data = 8'b00000000; // 
             11'h001: data = 8'b00000000; // 
             11'h002: data = 8'b00000000; // 
