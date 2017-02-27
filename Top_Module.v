@@ -27,9 +27,10 @@ module Top_Module(
      output wire [2:0] rgb
     );
     
-        wire [9:0] pixel_x, pixel_y;
-        wire video_on, tick, rom_addr, font_word, font_bit;
-        
+     wire [9:0] pixel_x, pixel_y;
+     wire video_on, tick, rom_addr, font_bit;
+     wire [7:0] font_word;
+//error corregido, font_word es de 8 bits        
         
         
 SincronizadorVGA SincronizadorVGA_unit(
