@@ -6,7 +6,7 @@ module Generador_datos
     input wire video_on,
     input wire [9:0] pixel_x, //posición pixel actual
     input wire [4:0] pixel_y,
-    output wire rom_addr
+    output wire [10:0] rom_addr
  );
 
  //variables internas de conexió
