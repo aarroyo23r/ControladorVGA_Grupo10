@@ -28,8 +28,9 @@ module Top_Module(
     );
     
      wire [9:0] pixel_x, pixel_y;
-     wire video_on, tick, rom_addr, font_bit;
+     wire video_on, tick, font_bit;
      wire [7:0] font_word;
+     wire [10:0] rom_addr;
 //error corregido, font_word es de 8 bits        
         
         
@@ -44,7 +45,6 @@ Generador_datos Generador_datos_unit
               .clk(clk),
               .video_on(video_on),
               .pixel_x(pixel_x), .pixel_y(pixel_y[4:0]), //posición pixel actual
-              .rgb_text(rgb),   // bit de color a VGA
               .rom_addr(rom_addr)
            ); 
      
