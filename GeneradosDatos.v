@@ -6,7 +6,6 @@ module Generador_datos
     input wire video_on,
     input wire [9:0] pixel_x, //posición pixel actual
     input wire [4:0] pixel_y,
-    output wire [2:0] rgb_text,   // bit de color a VGA
     output wire rom_addr
  );
 
@@ -17,7 +16,6 @@ module Generador_datos
  wire [2:0] bit_addr; // señal de control MUX final
  wire [7:0] font_word; // datos de memoria
  wire bit5_y; //5to bit de posicion en y
- wire [4:0] bajos_x;
  reg [1:0] selecreg;
  reg [1:0] letra;
  
@@ -28,7 +26,6 @@ module Generador_datos
 //body
 assign bit5_y = pixel_y[4];
 assign row_addr= pixel_y[3:0]; //4 bits menos significatvos de y
-assign bajos_x = pixel_x[4:0]; // menos significativos de x;
 
     always @(posedge clk)            // No se pueden mezclar partes conbinacionales y secuenciales en la lista de sensibilidad
     begin
