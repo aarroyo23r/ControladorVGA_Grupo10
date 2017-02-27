@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps //daba warning sin timescale, no se si era necesario no tenerlo
+
 module SincronizadorVGA(
   input wire clk,reset,
   output wire hsync,vsync,video_on,tick,
