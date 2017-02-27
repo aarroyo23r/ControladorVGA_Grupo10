@@ -28,7 +28,7 @@ module Top_Module(
     );
     
         wire [9:0] pixel_x, pixel_y;
-        wire video_on, tick;
+        wire video_on, tick, rom_addr, font_word, font_bit;
         
         
         
@@ -44,7 +44,23 @@ Generador_datos Generador_datos_unit
               .video_on(video_on),
               .pixel_x(pixel_x), .pixel_y(pixel_y[4:0]), //posición pixel actual
               .rgb_text(rgb),   // bit de color a VGA
-              .switch(switch)
+              .rom_addr(rom_addr)
            ); 
-          
+     
+Font_rom Font_memory
+     (
+          .dir(rom_addr),
+          .clk(clk),
+          .data(font_word)
+     );
+
+ assign font_bit =font_word [~pixel_x[2:0]];    
+ Color color
+     (
+          .clk(clk),
+          .switch(switch),
+          .rgb(rgb),
+          .bit_let(font_bit),
+          .video_on(video_on)
+     );
 endmodule
