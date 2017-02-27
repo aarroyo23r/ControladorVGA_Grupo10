@@ -33,14 +33,14 @@ module Color( //declaración de variables
     always @(posedge clk) //operación se realiza con cada pulso de reloj
         if (bit_let)  //se encienden los LEDs solo si el bit se encuentra en 1 en memoria
             case (switch) // combinación de colores seleccionados de acuerdo al switch, solo se puede seleccionar un siwtch a la vez
-            8'b00000001: rgb_reg = 3'b001;
-            8'b00000010: rgb_reg = 3'b010;
-            8'b00000100: rgb_reg = 3'b011;
-            8'b00001000: rgb_reg = 3'b100;
-            8'b00010000: rgb_reg = 3'b101;
-            8'b00100000: rgb_reg = 3'b110;
-            8'b01000000: rgb_reg = 3'b111;
-            8'b10000000: rgb_reg = 3'b000;
+            8'b00000001: rgb_reg = 3'b001;//Azul
+            8'b00000010: rgb_reg = 3'b010;//Verde
+            8'b00000100: rgb_reg = 3'b011;//Verde Azulado
+            8'b00001000: rgb_reg = 3'b100;//Rojo
+            8'b00010000: rgb_reg = 3'b101;//Morado
+            8'b00100000: rgb_reg = 3'b110;//Cafe
+            8'b01000000: rgb_reg = 3'b111;//Blanco
+            8'b10000000: rgb_reg = 3'b000;//Negro
         endcase
      else 
         rgb_reg <= 0;

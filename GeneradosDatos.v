@@ -4,9 +4,10 @@ module Generador_datos
     (
     input wire clk,
     input wire video_on,
-    input wire [9:0] pixel_x, pixel_y, //posición pixel actual
-    output reg [2:0] rgb_text   // bit de color a VGA
-    input wire[7:0] switch
+    input wire [9:0] pixel_x, //posición pixel actual
+    input wire [4:0] pixel_y,
+    output wire [2:0] rgb_text,   // bit de color a VGA
+    input wire [7:0] switch
  );
 
  //variables internas de conexió
@@ -21,6 +22,10 @@ module Generador_datos
  wire [4:0] bajos_x;
  reg [1:0] selecreg;
  reg [1:0] letra;
+ 
+ 
+
+ 
 
 //body
 assign bit_addr =pixel_x[2:0];
