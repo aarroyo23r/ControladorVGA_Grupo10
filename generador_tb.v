@@ -4,7 +4,7 @@ module generador_tb();
     wire[2:0] rgb_tb;
     reg [7:0] switch;
     reg clk, video_on;
-    integer i,x,h;
+    integer i,x;
     reg [9:0] pixel_x,pixel_y;
     
 GeneradoDatosTestbench Gd_tbunit(.clk(clk), .video_on (video_on), .pixel_x(pixel_x), .pixel_y(pixel_y), .rgb_text(rgb_tb), .switch(switch));
