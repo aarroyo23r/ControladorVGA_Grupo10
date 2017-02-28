@@ -59,11 +59,12 @@ end
 always @(posedge clk)
 if (mod4_reg== 2'b11)//Cuando el contador llega a 4 genera una señal de tick y se reinicia
 begin
-pixel_tick=~pixel_tick;//Señal a 25Mhz
+pixel_tick=~pixel_tick;//Señal cada 25Mhz
 mod4_reg=2'b00;
 end
 else//Si el contador no llega a ese valor sigue contando
 begin
+pixel_tick=0;
 mod4_reg=mod4_reg+1;
 end
 
