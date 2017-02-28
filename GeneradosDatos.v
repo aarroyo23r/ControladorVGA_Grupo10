@@ -23,26 +23,16 @@ assign bit5_y = pixel_y[4];
 assign row_addr= pixel_y[3:0]; //4 bits menos significatvos de y
 
 always @(pixel_x)
-    begin
-        if ((pixel_x < 10'b0000011000) && (pixel_x>10'b0000001111))begin       //Análisis de las filas
-            letra = 2'b11;end                                               // si pixel_x es menor que 8; le asigna la letra E
-        if ((pixel_x < 10'b0000010000) && (pixel_x>10'b0000000111))begin
-             letra = 2'b10;end
-        if (pixel_x < 10'b0000001000)begin
-             letra = 2'b01;end
-     end    
-
-always @ (letra or bit5_y)
-    begin                                       //Análisis por columnas con el 5to bit de pixel_y
-       case(bit5_y)
-       1'b1:selecreg = 2'b00;
-       1'b0:selecreg = letra;   
-       endcase
-    end
-always@(pixel_x)begin    
- if (pixel_x > 10'b0000011000)begin
-             selecreg = 2'b00;end
-     end    
+   begin
+       if ((pixel_x < 10'b0000011000) && (pixel_x>10'b0000001111))begin       //Análisis de las filas
+            selecreg = 2'b11;end                                               // si pixel_x es menor que 8; le asigna la letra E
+       if ((pixel_x < 10'b0000010000) && (pixel_x>10'b0000000111))begin
+             selecreg = 2'b10;end
+       if (pixel_x < 10'b0000001000)begin
+             selecreg = 2'b01;end
+       if (pixel_x > 10'b0000011000 | pixel_y>10'b0000001000)begin
+                         selecreg = 2'b00;end
+  end    
    
     
 //Registros que almacenan direccionens
