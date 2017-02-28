@@ -30,7 +30,7 @@ always @(pixel_x)
              selecreg = 2'b10;end
        if (pixel_x < 10'b0000001000)begin
              selecreg = 2'b01;end
-       if (pixel_x > 10'b0000011000 | pixel_y>10'b0000001000)begin
+       if (pixel_x > 10'b0000011000 | pixel_y>10'b0000000111)begin
                          selecreg = 2'b00;end
   end    
    
