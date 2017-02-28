@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps //daba warning sin timescale, no se si era necesario no tenerlo
+`timescale 10ns / 1ps 
 
 module SincronizadorVGA(
   input wire clk,reset,
@@ -67,6 +67,7 @@ begin
 pixel_tick=0;
 mod4_reg=mod4_reg+1;
 end
+
 
 
 //Señales de estado
