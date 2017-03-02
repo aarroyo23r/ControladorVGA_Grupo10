@@ -22,7 +22,7 @@ module Generador_datos
 assign bit5_y = pixel_y[4];
 assign row_addr= pixel_y[3:0]; //4 bits menos significatvos de y
 
-always @(pixel_x)
+    always @(pixel_x or pixel_y)
    begin
        if ((pixel_x < 10'b0000011000) && (pixel_x>10'b0000001111))begin       //Análisis de las filas
             selecreg = 2'b11;end                                               // si pixel_x es menor que 8; le asigna la letra E
@@ -30,7 +30,7 @@ always @(pixel_x)
              selecreg = 2'b10;end
        if (pixel_x < 10'b0000001000)begin
              selecreg = 2'b01;end
-       if (pixel_x > 10'b0000011000 | pixel_y>10'b0000000111)begin
+       if ((pixel_x > 10'b0000011000) | (pixel_y>10'b0000000111))begin
                          selecreg = 2'b00;end
   end    
    
