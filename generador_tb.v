@@ -7,7 +7,7 @@ module generador_tb();
     integer i,x;
     reg [9:0] pixel_x,pixel_y;
     
-GeneradoDatosTestbench Gd_tbunit(.clk(clk), .video_on (video_on), .pixel_x(pixel_x), .pixel_y(pixel_y), .rgb_text(rgb_tb), .switch(switch));
+GeneradosDatosTestbench Gd_tbunit(.clk(clk), .video_on (video_on), .pixel_x(pixel_x), .pixel_y(pixel_y), .rgb_text(rgb_tb), .switch(switch));
 initial 
     begin
     clk = 0;

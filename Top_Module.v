@@ -1,25 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 02/27/2017 11:04:08 AM
-// Design Name: 
-// Module Name: Top_Module
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-
 module Top_Module(
      input clk,reset,
      input wire [7:0] switch,
@@ -43,8 +22,7 @@ SincronizadorVGA SincronizadorVGA_unit(
 Generador_datos Generador_datos_unit
               (
               .clk(clk),
-              .video_on(video_on),
-              .pixel_x(pixel_x), .pixel_y(pixel_y[4:0]), //posición pixel actual
+              .pixel_x(pixel_x), .pixel_y(pixel_y), //posición pixel actual
               .rom_addr(rom_addr)
            ); 
      

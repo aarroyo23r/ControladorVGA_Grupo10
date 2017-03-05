@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module Generador_datos
+module GeneradosDatosTestbench
     (
     input wire clk,
     input wire video_on,
@@ -28,7 +28,7 @@ assign row_addr= pixel_y[3:0]; //4 bits menos significatvos de y
 
 always @(pixel_x)
     begin
-        if ((pixel_x < 10'b0000011000) && (pixel_x>10'b0000001111))begin       //Análisis de las filas y columnas
+        if ((pixel_x < 10'b0000011000) && (pixel_x>10'b0000001111))begin       //Análisis de las filas
             selecreg = 2'b11;end                                               // si pixel_x es menor que 8; le asigna la letra E
         if ((pixel_x < 10'b0000010000) && (pixel_x>10'b0000000111))begin
              selecreg = 2'b10;end
@@ -38,6 +38,8 @@ always @(pixel_x)
                          selecreg = 2'b00;end
      end    
 
+
+ 
 //Registros que almacenan direccionens
 Registros register_unit
        (.clk(clk), .selec(selecreg), .direc(char_addr));
